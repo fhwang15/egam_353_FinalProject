@@ -1,0 +1,85 @@
+using UnityEngine;
+
+public class CubeManager : MonoBehaviour
+{
+    public GameObject cubePrefab;  
+    public float cubeSize = 1f;    
+    public float spacing = 0.6f;
+
+    public Transform platform; 
+    public float rotationSpeed = 30f;
+
+    private GameObject[,,] cubes = new GameObject[3, 3, 3];
+    void Start()
+    {
+        GenerateCubes();
+    }
+
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            RotatePlatform();
+        }
+    }
+
+    //Makey Makey: Rotate the platform
+    void RotatePlatform() 
+    {
+        platform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
+    }
+
+    void GenerateCubes()
+    {
+        float totalSize = cubeSize + spacing; //Cube size and spacing
+
+        //Actually generate cubes in a 3x3x3 grid
+        for (int y = 0; y < 3; y++)
+        {
+            for (int x = 0; x < 3; x++)
+            {
+                for (int z = 0; z < 3; z++) 
+                {
+
+                    Vector3 position = new Vector3((x-1) * totalSize, (y-1) * totalSize, (z - 1) * totalSize);
+
+                    // Generating the Cube (with cube prefab)
+                    GameObject cube = Instantiate(cubePrefab, position, Quaternion.identity);
+                    cube.transform.parent = platform; //Set parent to this manager
+                    cube.name = $"Cube_{x}_{y}_{z}"; //Names
+
+                    CubeScript cubeScript = cube.AddComponent<CubeScript>();
+                    cubeScript.x = x;
+                    cubeScript.y = y;
+                    cubeScript.z = z;
+
+
+                    cubes[x, y, z] = cube;
+
+                    SetCubeColor(cube, y);
+                }
+            }
+        }
+    }
+
+    void SetCubeColor(GameObject cube, int layer)
+    {
+        Renderer renderer = cube.GetComponent<Renderer>();
+
+        if (layer == 0)
+        {
+            renderer.material.color = Color.red;   
+
+        }
+        else if (layer == 1)
+        {
+            renderer.material.color = Color.yellow;   
+
+        }
+        else if (layer == 2)
+        {
+            renderer.material.color = Color.green; 
+
+        }
+    }
+}
