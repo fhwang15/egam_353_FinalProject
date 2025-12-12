@@ -46,12 +46,23 @@ public class CubeManager : MonoBehaviour
                     // Generating the Cube (with cube prefab)
                     GameObject cube = Instantiate(cubePrefab, position, Quaternion.identity);
                     cube.transform.parent = platform; //Set parent to this manager
-                    cube.name = $"Cube_{x}_{y}_{z}"; //Names
+                   
+                    BoxCollider collider = cube.GetComponent<BoxCollider>();
+                    if (collider != null)
+                    {
+                        collider.isTrigger = true;  // 중요!
+                    }
 
+                    // SimpleHandCube 추가
+                    cube.AddComponent<SimpleHandCube>();
+
+                    // CubeScript 추가
                     CubeScript cubeScript = cube.AddComponent<CubeScript>();
                     cubeScript.x = x;
                     cubeScript.y = y;
                     cubeScript.z = z;
+
+                    cube.name = $"Cube_{x}_{y}_{z}"; //Names
 
 
                     cubes[x, y, z] = cube;
