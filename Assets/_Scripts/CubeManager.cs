@@ -9,7 +9,7 @@ public class CubeManager : MonoBehaviour
     public Transform platform; 
     public float rotationSpeed = 30f;
 
-    private GameObject[,,] cubes = new GameObject[3, 3, 3];
+    private GameObject[,,] cubes = new GameObject[4, 4, 4];
     void Start()
     {
         GenerateCubes();
@@ -34,11 +34,11 @@ public class CubeManager : MonoBehaviour
         float totalSize = cubeSize + spacing; //Cube size and spacing
 
         //Actually generate cubes in a 3x3x3 grid
-        for (int y = 0; y < 3; y++)
+        for (int y = 0; y < 4; y++)
         {
-            for (int x = 0; x < 3; x++)
+            for (int x = 0; x < 4; x++)
             {
-                for (int z = 0; z < 3; z++) 
+                for (int z = 0; z < 4; z++) 
                 {
 
                     Vector3 position = new Vector3((x-1) * totalSize, (y-1) * totalSize, (z - 1) * totalSize);
@@ -46,19 +46,10 @@ public class CubeManager : MonoBehaviour
                     // Generating the Cube (with cube prefab)
                     GameObject cube = Instantiate(cubePrefab, position, Quaternion.identity);
                     cube.transform.parent = platform; //Set parent to this manager
-                   
-                    BoxCollider collider = cube.GetComponent<BoxCollider>();
-                    if (collider != null)
-                    {
-                        collider.isTrigger = true;  // 중요!
-                    }
+                  
 
-
-
-                    // SimpleHandCube 추가
                     cube.AddComponent<SimpleHandCube>();
 
-                    // CubeScript 추가
                     CubeScript cubeScript = cube.AddComponent<CubeScript>();
                     cubeScript.x = x;
                     cubeScript.y = y;

@@ -1453,6 +1453,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1686495965}
   m_CullTransparentMesh: 1
+--- !u!1 &1735284212
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1735284214}
+  - component: {fileID: 1735284213}
+  m_Layer: 0
+  m_Name: HandCubeInteraction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1735284213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735284212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5439bea56ed1f2947958691fe2ee1733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandCubeInteraction
+--- !u!4 &1735284214
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735284212}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.29245, y: -0.31913, z: 0.69454}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1765202535
 GameObject:
   m_ObjectHideFlags: 0
@@ -2133,7 +2177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3760904165249776173, guid: 8e0fbeda1179e774da6992760eebb4f1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -3.5818906e-19
+      value: -4.5856246e-19
       objectReference: {fileID: 0}
     - target: {fileID: 3760904165249776173, guid: 8e0fbeda1179e774da6992760eebb4f1, type: 3}
       propertyPath: m_LocalRotation.z
@@ -6709,3 +6753,4 @@ SceneRoots:
   - {fileID: 411873239}
   - {fileID: 1910457685}
   - {fileID: 1884032339}
+  - {fileID: 1735284214}
