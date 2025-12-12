@@ -53,6 +53,8 @@ public class CubeManager : MonoBehaviour
                         collider.isTrigger = true;  // 중요!
                     }
 
+
+
                     // SimpleHandCube 추가
                     cube.AddComponent<SimpleHandCube>();
 
