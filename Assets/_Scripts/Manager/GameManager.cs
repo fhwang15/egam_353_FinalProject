@@ -1,5 +1,7 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 using static GameManager;
 
@@ -9,6 +11,13 @@ public class GameManager : MonoBehaviour
     public ScoreManager scoreManager;
     public SlotUIManager slotUIManager;
 
+    public Slider gameTimerSlider;  
+    public float gameTimeLimit = 300f; 
+
+    public TextMeshProUGUI scoreText;
+    private bool gameOver = false;
+    private float remainingTime;
+
     private int currentSlotIndex = 0;
     private int totalScore = 0;
 
@@ -16,10 +25,24 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Invoke("Initialize", 0.2f); 
+        remainingTime = gameTimeLimit;
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (!gameOver)
+        {
+
+            remainingTime -= Time.deltaTime;
+            UpdateGameTimer();
+
+            if (remainingTime <= 0)
+            {
+                GameOver();
+                return;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             ChangeSlot();
         }
@@ -28,14 +51,50 @@ public class GameManager : MonoBehaviour
         {
             SubmitCurrentSlot();
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ResetCubes();
+        }
     }
 
     void Initialize()
     {
         currentSlotIndex = 0;
         UpdateSlotSelection();
-        Debug.Log("Game started - Slot 1 selected");
     }
+
+
+    void UpdateGameTimer()
+    {
+        gameTimerSlider.value = remainingTime / gameTimeLimit;
+
+        Image fill = gameTimerSlider.fillRect.GetComponent<Image>();
+        float ratio = remainingTime / gameTimeLimit;
+
+        if (ratio > 0.5f)
+        {
+            fill.color = Color.green;
+        }
+        else if (ratio > 0.25f)
+        {
+            fill.color = Color.yellow;
+        }
+        else
+        {
+            fill.color = Color.red;
+
+        }
+    }
+
+    void GameOver()
+    {
+        gameOver = true;
+        Debug.Log($"=== GAME OVER ===");
+        Debug.Log($"Final Score: {totalScore}");
+        // TODO: 게임 오버 화면
+    }
+
 
     void ChangeSlot()
     {
@@ -84,26 +143,27 @@ public class GameManager : MonoBehaviour
 
         AddScore(score);
 
-        Debug.Log($"Submitted! Score: {score}, Total: {totalScore}");
     }
 
     public void AddScore(int score)
     {
         totalScore += score;
-        Debug.Log($"Total Score: {totalScore}");
-        // TODO: UI에 총점 표시
+        scoreText.text = $"Score: {totalScore}";
     }
 
     public void SubtractScore(int penalty)
     {
         totalScore -= penalty;
-        Debug.Log($"Penalty! Total Score: {totalScore}");
-        // TODO: UI에 총점 표시
+        scoreText.text = $"Score: {totalScore}";
     }
     public void InitializeSelection()
     {
         currentSlotIndex = 0;
         UpdateSlotSelection();
-        Debug.Log("First slot selected!");
+    }
+
+    void ResetCubes()
+    {
+        cubeManager.ResetCubes();
     }
 }

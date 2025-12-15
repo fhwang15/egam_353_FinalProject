@@ -111,4 +111,37 @@ public class CubeManager : MonoBehaviour
         Debug.Log($"Layer counts: [{counts[0]}, {counts[1]}, {counts[2]}, {counts[3]}]");
         return counts;
     }
+
+    public bool IsCubeActive(int x, int y, int z)
+    {
+        if (x < 0 || x >= 4 || y < 0 || y >= 4 || z < 0 || z >= 4)
+            return false;
+
+        return cubes[x, y, z] != null && cubes[x, y, z].activeSelf;
+    }
+
+    public void ResetCubes()
+    {
+        Debug.Log("Resetting all cubes!");
+
+        for (int y = 0; y < 4; y++)
+        {
+            for (int x = 0; x < 4; x++)
+            {
+                for (int z = 0; z < 4; z++)
+                {
+                    if (cubes[x, y, z] != null)
+                    {
+                        cubes[x, y, z].SetActive(true);
+
+                        CubeScript cubeScript = cubes[x, y, z].GetComponent<CubeScript>();
+                        if (cubeScript != null)
+                        {
+                            cubeScript.isActive = true;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

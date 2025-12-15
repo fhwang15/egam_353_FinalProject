@@ -12,12 +12,16 @@ public class SlotUI : MonoBehaviour
     private bool isSelected = false;
     private bool isSubmitted = false;
 
+    public Image timerCircle;
+
     [HideInInspector]
     public int slotIndex;
 
     private Recipe recipe;
     private float remainingTime;
     private bool isActive = false;
+
+    private float maxTime;
 
 
     public Action<int> OnSlotExpired;
@@ -47,10 +51,9 @@ public class SlotUI : MonoBehaviour
         slotIndex = index;
         recipeDisplay.texture = renderTexture; 
 
-        Debug.Log($"SlotUI {index}: Setting texture to {renderTexture?.name}");  
-
         recipeName.text = recipe.recipeName;
         remainingTime = recipe.timeLimit;
+        maxTime = recipe.timeLimit;
         isActive = true;
         isSubmitted = false;
 
@@ -58,15 +61,24 @@ public class SlotUI : MonoBehaviour
         UpdateVisuals();
     }
 
+
+
     public void Submit(int score)
     {
         if (isSubmitted) return;
 
         isSubmitted = true;
-        timerText.text = $"Score: {score}";
+
+        timerCircle.fillAmount = 0;
+        if (timerText != null)
+        {
+            timerText.text = $"Score: {score}";
+
+        }
         UpdateVisuals();
 
         OnSlotSubmitted?.Invoke(slotIndex, score);
+        Invoke("DestroySelf", 1f);
     }
 
     void SlotExpired()
@@ -78,7 +90,7 @@ public class SlotUI : MonoBehaviour
         OnSlotExpired?.Invoke(slotIndex);
 
     
-        Invoke("DestroySelf", 5f);
+        Invoke("DestroySelf", 2f);
     }
 
     void DestroySelf()
@@ -88,20 +100,25 @@ public class SlotUI : MonoBehaviour
 
     void UpdateTimerDisplay()
     {
-        int seconds = Mathf.CeilToInt(remainingTime);
-        timerText.text = $"{seconds}s";
 
-        if (remainingTime <= 10f)
+        timerCircle.fillAmount = remainingTime / maxTime;
+
+
+        float ratio = remainingTime / maxTime;
+        if (ratio > 0.5f)
         {
-            timerText.color = Color.red;
+            timerCircle.color = Color.green;
+
         }
-        else if (remainingTime <= 20f)
+        else if (ratio > 0.25f)
         {
-            timerText.color = Color.yellow;
+            timerCircle.color = Color.yellow;
+
         }
         else
         {
-            timerText.color = Color.white;
+            timerCircle.color = Color.red;
+
         }
     }
 
