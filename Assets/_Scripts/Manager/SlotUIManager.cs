@@ -41,7 +41,6 @@ public class SlotUIManager : MonoBehaviour
 
     void CreateSlotAtIndex(int index)
     {
-        // 랜덤 레시피 선택
         Recipe recipe = RecipeManager.Instance.GetRandomRecipe();
 
         Debug.Log($"=== CreateSlotAtIndex {index} START ===");
@@ -49,7 +48,6 @@ public class SlotUIManager : MonoBehaviour
         Debug.Log($"RecipeSlot: {recipeSlots[index]?.name}");
         Debug.Log($"RenderTexture: {renderTextures[index]?.name}");
 
-        // 기존 슬롯 삭제 (중요!)
         if (slots[index] != null)
         {
             Debug.Log($"Destroying existing slot {index}");
@@ -59,23 +57,18 @@ public class SlotUIManager : MonoBehaviour
 
         Debug.Log($"Creating slot {index} with recipe: {recipe.recipeName}");
 
-        // 3D 슬롯에 표시
         recipeSlots[index].DisplayRecipe(recipe);
 
-        // UI 생성
         GameObject slotObj = Instantiate(slotUIPrefab, slotContainer);
         SlotUI slotUI = slotObj.GetComponent<SlotUI>();
 
-        // 위치 설정
         RectTransform rect = slotObj.GetComponent<RectTransform>();
         rect.anchoredPosition = new Vector2(-500 + index * 500, 400);
 
-        // 초기화 (RenderTexture 연결!)
         slotUI.Initialize(recipe, renderTextures[index], index);
 
         Debug.Log($"SlotUI initialized with RT: {renderTextures[index]?.name}");
 
-        // 콜백 등록
         slotUI.OnSlotExpired = OnSlotExpired;
         slotUI.OnSlotSubmitted = OnSlotSubmitted;
 

@@ -32,7 +32,6 @@ public class SlotUI : MonoBehaviour
 
             if (remainingTime <= 0)
             {
-                // 시간 초과!
                 SlotExpired();
             }
             else
@@ -46,9 +45,9 @@ public class SlotUI : MonoBehaviour
     {
         recipe = recipeData;
         slotIndex = index;
-        recipeDisplay.texture = renderTexture;  // ← 이게 제대로 실행되는지!
+        recipeDisplay.texture = renderTexture; 
 
-        Debug.Log($"SlotUI {index}: Setting texture to {renderTexture?.name}");  // 디버그 추가!
+        Debug.Log($"SlotUI {index}: Setting texture to {renderTexture?.name}");  
 
         recipeName.text = recipe.recipeName;
         remainingTime = recipe.timeLimit;
@@ -78,7 +77,7 @@ public class SlotUI : MonoBehaviour
 
         OnSlotExpired?.Invoke(slotIndex);
 
-        // 5초 후 삭제
+    
         Invoke("DestroySelf", 5f);
     }
 
@@ -92,7 +91,6 @@ public class SlotUI : MonoBehaviour
         int seconds = Mathf.CeilToInt(remainingTime);
         timerText.text = $"{seconds}s";
 
-        // 시간 적으면 색깔 변경
         if (remainingTime <= 10f)
         {
             timerText.color = Color.red;
@@ -117,15 +115,15 @@ public class SlotUI : MonoBehaviour
     {
         if (isSubmitted)
         {
-            background.color = new Color(0.3f, 0.3f, 0.3f);  // 회색
+            background.color = Color.gray;
         }
         else if (isSelected)
         {
-            background.color = Color.yellow;  // 노랑
+            background.color = Color.yellow;
         }
         else
         {
-            background.color = Color.white;  // 기본
+            background.color = Color.white; 
         }
     }
 

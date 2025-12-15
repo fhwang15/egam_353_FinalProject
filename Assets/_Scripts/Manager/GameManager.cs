@@ -32,14 +32,13 @@ public class GameManager : MonoBehaviour
 
     void Initialize()
     {
-        currentSlotIndex = 0;  // 첫 번째 슬롯
+        currentSlotIndex = 0;
         UpdateSlotSelection();
         Debug.Log("Game started - Slot 1 selected");
     }
 
     void ChangeSlot()
     {
-        // 다음 활성 슬롯 찾기
         int startIndex = currentSlotIndex;
         do
         {
@@ -48,13 +47,12 @@ public class GameManager : MonoBehaviour
             SlotUI slot = slotUIManager.GetSlot(currentSlotIndex);
             if (slot != null && slot.IsActive())
             {
-                break;  // 활성 슬롯 찾음
+                break;
             }
 
         } while (currentSlotIndex != startIndex);
 
         UpdateSlotSelection();
-        Debug.Log($"Selected Slot: {currentSlotIndex + 1}");
     }
 
     void UpdateSlotSelection()
@@ -79,14 +77,11 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // 점수 계산
         Recipe recipe = currentSlot.GetRecipe();
         int score = scoreManager.CalculateScore(recipe);
 
-        // 슬롯에 제출 (자동으로 OnSlotSubmitted 콜백 호출됨)
         currentSlot.Submit(score);
 
-        // 총점 추가
         AddScore(score);
 
         Debug.Log($"Submitted! Score: {score}, Total: {totalScore}");

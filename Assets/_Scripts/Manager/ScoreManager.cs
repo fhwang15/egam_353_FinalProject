@@ -8,25 +8,25 @@ public class ScoreManager : MonoBehaviour
     {
         int[] currentLayerCounts = cubeManager.GetCurrentLayerCounts();
 
-        // 완벽 매칭 체크
+
         if (IsPerfectMatch(recipe, currentLayerCounts))
         {
             Debug.Log("Perfect Match! 100 points!");
             return 100;
         }
 
-        // 층별 부분 점수
+
         int score = 0;
         for (int y = 0; y < 4; y++)
         {
             if (currentLayerCounts[y] == recipe.layerCounts[y])
             {
-                score += 25;  // 층 정확히 일치
+                score += 25; 
                 Debug.Log($"Layer {y} perfect: +25");
             }
             else
             {
-                // 근접도 점수
+
                 int diff = Mathf.Abs(currentLayerCounts[y] - recipe.layerCounts[y]);
                 int layerScore = Mathf.Max(0, 25 - diff * 2);
                 score += layerScore;

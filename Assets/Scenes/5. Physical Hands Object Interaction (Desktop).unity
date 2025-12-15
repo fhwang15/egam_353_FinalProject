@@ -5898,8 +5898,8 @@ MonoBehaviour:
   slotContainer: {fileID: 1587379886}
   renderTextures:
   - {fileID: 8400000, guid: 0e9552795856983459d926cf58737c0a, type: 2}
-  - {fileID: 8400000, guid: 92fb8186e790dbc4aa9073205ff8f2c9, type: 2}
   - {fileID: 8400000, guid: 63f0bc568da8a40478a22dc89c2841e5, type: 2}
+  - {fileID: 8400000, guid: 92fb8186e790dbc4aa9073205ff8f2c9, type: 2}
   recipeSlots:
   - {fileID: 1929640074}
   - {fileID: 1568111418}
