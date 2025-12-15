@@ -38,14 +38,11 @@ public class SimpleHandCube : MonoBehaviour
     {
         if (hasBeenTouched) return;
 
-        Debug.Log($"Trigger detected with: {other.gameObject.name}");
-
         if (other.gameObject.name.Contains("Hand") ||
             other.gameObject.name.Contains("Palm") ||
             other.gameObject.name.Contains("Finger") ||
             other.gameObject.name.Contains("Bone"))
         {
-            Debug.Log($"Hand trigger confirmed!");
 
             if (cubeScript != null && cubeScript.isActive)
             {

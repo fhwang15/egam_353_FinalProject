@@ -41,7 +41,7 @@ public class CubeManager : MonoBehaviour
                 for (int z = 0; z < 4; z++) 
                 {
 
-                    Vector3 position = new Vector3((x-1) * totalSize, (y-1) * totalSize, (z - 1) * totalSize);
+                    Vector3 position = new Vector3((x-1.5f) * totalSize, (y- 1.5f) * totalSize, (z - 1.5f) * totalSize);
 
                     // Generating the Cube (with cube prefab)
                     GameObject cube = Instantiate(cubePrefab, position, Quaternion.identity);
@@ -77,13 +77,16 @@ public class CubeManager : MonoBehaviour
         }
         else if (layer == 1)
         {
-            renderer.material.color = Color.yellow;   
+            renderer.material.color = Color.orange;   
 
         }
         else if (layer == 2)
         {
-            renderer.material.color = Color.green; 
+            renderer.material.color = Color.yellow; 
 
+        } else if(layer == 3)
+        {                       
+            renderer.material.color = Color.green;
         }
     }
 }
