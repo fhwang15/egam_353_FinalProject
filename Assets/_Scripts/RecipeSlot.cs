@@ -40,7 +40,7 @@ public class RecipeSlot : MonoBehaviour
     public void DisplayRecipe(Recipe recipeData)
     {
         recipe = recipeData;
-        SetContainer();
+        Debug.Log($"{gameObject.name} displaying: {recipe.recipeName}");
         GenerateMiniCubes();
     }
 

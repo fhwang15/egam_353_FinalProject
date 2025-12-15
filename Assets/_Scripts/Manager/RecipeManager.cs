@@ -5,16 +5,17 @@ using UnityEngine;
 
 public class RecipeManager : MonoBehaviour
 {
+    public static RecipeManager Instance;  // ΩÃ±€≈Ê
 
     public Recipe[] recipes = new Recipe[3];
     public RecipeSlot[] slots = new RecipeSlot[3];
 
-    void Start()
+    void Awake()  // Start ¥ÎΩ≈ Awake!
     {
+        Instance = this;
         CreateRecipes();
         DisplayRecipes();
     }
-
     void CreateRecipes()
     {
         // Center Pillar 30 sec
@@ -92,6 +93,12 @@ public class RecipeManager : MonoBehaviour
         {
             slots[i].DisplayRecipe(recipes[i]);
         }
+    }
+
+    public Recipe GetRandomRecipe()
+    {
+        int randomIndex = Random.Range(0, recipes.Length);
+        return recipes[randomIndex];
     }
 
 }

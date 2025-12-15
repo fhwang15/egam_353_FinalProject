@@ -89,4 +89,26 @@ public class CubeManager : MonoBehaviour
             renderer.material.color = Color.green;
         }
     }
+
+    public int[] GetCurrentLayerCounts()
+    {
+        int[] counts = new int[4];
+
+        for (int y = 0; y < 4; y++)
+        {
+            for (int x = 0; x < 4; x++)
+            {
+                for (int z = 0; z < 4; z++)
+                {
+                    if (cubes[x, y, z] != null && cubes[x, y, z].activeSelf)
+                    {
+                        counts[y]++;
+                    }
+                }
+            }
+        }
+
+        Debug.Log($"Layer counts: [{counts[0]}, {counts[1]}, {counts[2]}, {counts[3]}]");
+        return counts;
+    }
 }
