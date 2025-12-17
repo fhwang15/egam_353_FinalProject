@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     private int totalScore = 0;
 
 
+
     private void Start()
     {
         Invoke("Initialize", 0.2f); 
@@ -74,7 +75,7 @@ public class GameManager : MonoBehaviour
 
         if (ratio > 0.5f)
         {
-            fill.color = Color.green;
+            fill.color = Color.aquamarine;
         }
         else if (ratio > 0.25f)
         {

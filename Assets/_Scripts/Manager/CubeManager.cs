@@ -72,21 +72,21 @@ public class CubeManager : MonoBehaviour
 
         if (layer == 0)
         {
-            renderer.material.color = Color.red;   
+            renderer.material.color = Color.sienna;   
 
         }
         else if (layer == 1)
         {
-            renderer.material.color = Color.orange;   
+            renderer.material.color = Color.brown;   
 
         }
         else if (layer == 2)
         {
-            renderer.material.color = Color.yellow; 
+            renderer.material.color = Color.grey; 
 
         } else if(layer == 3)
         {                       
-            renderer.material.color = Color.green;
+            renderer.material.color = Color.beige;
         }
     }
 
