@@ -43,6 +43,21 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            AudioManager.Instance?.StartPedalLoop();
+        }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            AudioManager.Instance?.StopPedalLoop();
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            AudioManager.Instance?.PlayButtonClick();
+            ChangeSlot();
+        }
+
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             ChangeSlot();
@@ -55,6 +70,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
+            AudioManager.Instance?.PlayReset();
             ResetCubes();
         }
     }
@@ -143,6 +159,9 @@ public class GameManager : MonoBehaviour
         currentSlot.Submit(score);
 
         AddScore(score);
+        ResetCubes();
+
+        AudioManager.Instance?.PlaySubmit();
 
     }
 

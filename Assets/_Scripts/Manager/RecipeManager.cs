@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class RecipeManager : MonoBehaviour
 {
-    public static RecipeManager Instance;  // ΩÃ±€≈Ê
+    public static RecipeManager Instance;
 
     public Recipe[] recipes = new Recipe[3];
     public RecipeSlot[] slots = new RecipeSlot[3];
 
-    void Awake()  // Start ¥ÎΩ≈ Awake!
+    void Awake() 
     {
         Instance = this;
         CreateRecipes();
