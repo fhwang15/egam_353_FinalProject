@@ -19,7 +19,7 @@ public class RecipeManager : MonoBehaviour
     void CreateRecipes()
     {
         // Center Pillar 30 sec
-        recipes[0] = new Recipe("Center Pillar", 30f);
+        recipes[0] = new Recipe("Center Pillar", 45f);
         for (int y = 0; y < 4; y++)
         {
             recipes[0].targetShape[1, y, 1] = true;
@@ -30,7 +30,7 @@ public class RecipeManager : MonoBehaviour
         recipes[0].CalculateLayerCounts();
 
         // Diagonal Stairs 45 sec
-        recipes[1] = new Recipe("Diagonal Stairs", 45f);
+        recipes[1] = new Recipe("Diagonal Stairs", 50f);
         // nothing on top floor
         recipes[1].targetShape[0, 0, 0] = true;
         recipes[1].targetShape[0, 0, 1] = true;
@@ -48,7 +48,7 @@ public class RecipeManager : MonoBehaviour
         recipes[1].CalculateLayerCounts();
 
         // Pyramid 60 sec
-        recipes[2] = new Recipe("Pyramid", 60f);
+        recipes[2] = new Recipe("Pyramid", 70f);
 
         // top
         for (int x = 0; x < 4; x++)
