@@ -107,8 +107,6 @@ public class CubeManager : MonoBehaviour
                 }
             }
         }
-
-        Debug.Log($"Layer counts: [{counts[0]}, {counts[1]}, {counts[2]}, {counts[3]}]");
         return counts;
     }
 
@@ -122,7 +120,6 @@ public class CubeManager : MonoBehaviour
 
     public void ResetCubes()
     {
-        Debug.Log("Resetting all cubes!");
 
         for (int y = 0; y < 4; y++)
         {

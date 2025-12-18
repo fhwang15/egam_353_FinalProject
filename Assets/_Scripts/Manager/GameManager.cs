@@ -21,12 +21,16 @@ public class GameManager : MonoBehaviour
     private int currentSlotIndex = 0;
     private int totalScore = 0;
 
+    public GameObject gameOverScreen;
+    public TextMeshProUGUI finalScoreText;
+
 
 
     private void Start()
     {
         Invoke("Initialize", 0.2f); 
         remainingTime = gameTimeLimit;
+        gameOverScreen.SetActive(false);
     }
     void Update()
     {
@@ -107,9 +111,8 @@ public class GameManager : MonoBehaviour
     void GameOver()
     {
         gameOver = true;
-        Debug.Log($"=== GAME OVER ===");
-        Debug.Log($"Final Score: {totalScore}");
-        // TODO: 게임 오버 화면
+        gameOverScreen.SetActive(true);
+        finalScoreText.text = $"Final Score: {totalScore}";
     }
 
 
